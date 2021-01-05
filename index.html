@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div class="mother ">
+
+  <div class="mother-1">
+    <div class="container">
+      <div class="donut-chart-block block">
+        <div class="donut-chart">
+          <div id="section1" class="clip">
+            <div class="item"></div>
+          </div>
+          <div id="section2" class="clip">
+            <div class="item"></div>
+          </div>
+          <div id="section3" class="clip">
+            <div class="item"></div>
+          </div>
+          <div class="center">
+            <span></span>
+          </div>
+        </div>
+        <span class="text" >pallette</span>
+      </div>
+      <div class="range-slider">
+        <input name = "pallette" id = "pallette" type="range" orient="vertical" min="0" max="100" step="11.111111111" />
+        <div class="range-slider__bar"></div>
+        <div class="range-slider__thumb"></div>
+      </div>
+      
+    </div>
+    
+    
+      <div class="container">
+      <div class="donut-chart-block block">
+        <div class="donut-chart">
+          <div id="section1" class="clip">
+            <div class="item"></div>
+          </div>
+          <div id="section2" class="clip">
+            <div class="item"></div>
+          </div>
+          <div id="section3" class="clip">
+            <div class="item"></div>
+          </div>
+          <div class="center">
+            <span></span>
+          </div>
+        </div>
+        <span class="text">speed</span>
+      </div>
+      <div class="range-slider">
+        <input id = "speed" type="range" orient="vertical" min="5=0" max="100" step="3.333333333333333333333" />
+        <div class="range-slider__bar"></div>
+        <div class="range-slider__thumb"></div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="donut-chart-block block">
+        <div class="donut-chart">
+          <div id="section1" class="clip">
+            <div class="item"></div>
+          </div>
+          <div id="section2" class="clip">
+            <div class="item"></div>
+          </div>
+          <div id="section3" class="clip">
+            <div class="item"></div>
+          </div>
+          <div class="center"><span></span></div>
+        </div>
+        <span class="text">line</span>
+      </div>
+      <div class="range-slider">
+        <input id = "line" type="range" orient="vertical" name = "line" min="0" max="100" step = "10">
+        <div class="range-slider__bar"></div>
+        <div class="range-slider__thumb"></div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="donut-chart-block block">
+        <div class="donut-chart">
+          <div id="section1" class="clip">
+            <div class="item"></div>
+          </div>
+          <div id="section2" class="clip">
+            <div class="item"></div>
+          </div>
+          <div id="section3" class="clip">
+            <div class="item"></div>
+          </div>
+          <div class="center"><span></span></div>
+        </div>
+        <span class="text">brightness</span>
+      </div>
+      <div class="range-slider">
+        <input  orient="vertical" type="range" id = "brightness" name = "brightness" min="0" max="100" step = '0.392156862745098'>
+        <div class="range-slider__bar"></div>
+        <div class="range-slider__thumb"></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="switch-box">
+    <div class="container flip">
+      <div class="range-slider check">
+        <label class="switch">
+          <input id="centred" name="centred" type="checkbox">
+          <span class="slider round"></span>
+      </label>
+      <span class="text switch-text">centred</span>
+      </div>
+    </div>
+    <div class="container flip ">
+      <div class="range-slider check">
+        <label class="switch">
+          <input id = "twist" name="twist" type="checkbox">
+          <span class="slider round"></span>
+        </label>
+        <span class="text switch-text">twist</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+      
+
+</body>
+<script src="./index.js"></script>
+<script src="./donut.js"></script>
+
+</script>
+</html>
