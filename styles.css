@@ -80,14 +80,17 @@ body {
 .container {
   display: flex;
   align-items: center;
-  margin-right: 30px;
+  margin-right: 0px;
+  width: fit-content;
+  flex-direction: column;
 }
 .block {
-  margin: 0 42px;
+  width: fit-content;
+  margin: 0 10px;
   background:transparent;
   border-radius: 5px;
   float: left;
-  width: 100px;
+  /* width: 100px; */
   overflow: hidden;
 }
 
@@ -103,7 +106,7 @@ body {
   position: relative;
   width: 100px;
   height: 100px;
-  margin: 2rem auto;
+  margin: 0rem auto;
   border-radius: 100%;
 }
 
@@ -173,7 +176,7 @@ body {
   width: 40px;
   position: relative;
   text-align: center;
-  height: 90px;
+  height: 350px;
 }
 .range-slider__thumb {
   position: absolute;
