@@ -115,16 +115,24 @@ function updateDonut(percent, element){
     
       [].forEach.call(document.getElementsByClassName("container"), function(el) {
       
-        var inputs = [].slice.call(el.querySelectorAll('.range-slider input'));
-        inputs.forEach(function (input) {
+        var sliders = [].slice.call(el.querySelectorAll('.range-slider input'));
+        sliders.forEach(function (slider) {
           
-            updateSlider(input);
-            input.addEventListener('input', function (element) {
-                updateSlider(input);
+            updateSlider(slider);
+            slider.addEventListener('input', function (element) {
+                updateSlider(slider);
             });
-            input.addEventListener('change', function (element) {
-                dataPrep(input.value, input.id);
+            slider.addEventListener('change', function (element) {
+                dataPrep(slider.value, slider.id);
             });
         });
+
+        var buttons = [].slice.call(el.querySelectorAll('.btn'));
+        buttons.forEach(function(button){
+          button.addEventListener('click', function(element){
+            changeValue(element);
+          });
+        });
+        
       });
   }());

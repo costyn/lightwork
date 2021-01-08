@@ -104,8 +104,8 @@ body {
 }
 .donut-chart {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   margin: 0rem auto;
   border-radius: 100%;
 }
@@ -136,15 +136,32 @@ body {
 
 .clip {
   border-radius: 50%;
-  clip: rect(0px, 100px, 100px, 50px);
+  clip: rect(0px, 75px, 75px, 35px);
   height: 100%;
   position: absolute;
   width: 100%;
 }
+.btn{
+  border-radius: 50px;
+  border: navajowhite;
+  width: 25px;
+  height: 25px;
+  margin: 10px 0;
+  font-family: 'Noto Sans';
+  font-size: 20px;
+  background: linear-gradient(335deg, rgb(125 107 84) 0%, rgb(125 122 125) 50%, rgb(248 248 248) 100%);
+  color: white;
+  text-align: center;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
 
 .item {
   border-radius: 50%;
-  clip: rect(0px, 50px, 100px, 0px);
+  clip: rect(0px, 35px, 75px, 0px);
   height: 100%;
   position: absolute;
   width: 100%;
