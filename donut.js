@@ -18,7 +18,7 @@ function dataPrep(value, node){
       break;
 
     case 'speed':
-    val = Math.floor(value/3.33333)
+      val= Math.floor(value/0.392156862745098);
       break;
 
     case 'twist':
@@ -26,7 +26,7 @@ function dataPrep(value, node){
       break;
 
     case 'line':
-      val= Math.floor(value/10)+5;
+      val= Math.round(value/8.3333333333333333333333333333333)+3;
       break;
 
     case 'centred':
