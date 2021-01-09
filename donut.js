@@ -44,25 +44,23 @@ function dataPrep(value, node){
 }
 
 function makeReq(value, name, arg){
-  console.log('http://192.168.178.45/update?' + `${name}=${value}`);
+  console.log(baseUrl + '/update?' + `${name}=${value}`);
   
-  // var path = baseUrl + 'pokemon/ditto'
+  var path = baseUrl + '/update?' + `${name}=${value}`);
 
-  // var myHeaders = new Headers();
-  // myHeaders.append("Cookie", "cool");
+  var myHeaders = new Headers();
+  myHeaders.append("Cookie", "cool");
   
-  // var requestOptions = {
-  //   method: 'GET',
-  //   headers: myHeaders,
-  //   redirect: 'follow'
-  // };
-  
-  // path = baseUrl + 'pokemon/ditto'
+  var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
 
-  // fetch(path, requestOptions)
-  //   .then(response => response.text())
-  //   .then(result => console.log(result))
-  //   .catch(error => console.log('error', error));
+  fetch(path, requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
 }
 
 function updateDonut(percent, element){
