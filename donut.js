@@ -1,6 +1,8 @@
 const baseUrl = "https://pokeapi.co/api/v2/"
 function dataPrep(value, node){
-  let val, arg
+  let val
+
+  // TODO :: Adding functionality to the params ===> BPM , pattern , translation-speed
   switch (node) {
     case 'pallette':
     val= Math.floor(value/10);
@@ -38,7 +40,6 @@ function dataPrep(value, node){
     default:
       break;
   }
-  makeReq(val, node, arg)
   return val
 }
 
@@ -65,7 +66,7 @@ function makeReq(value, name, arg){
 }
 
 function updateDonut(percent, element){
-    //var percent = 45;
+      
     if (percent < 50){
       offset = (360 / 100) * percent;
       element.parentNode.querySelector("#section3").style.webkitTransform = "rotate(" + offset + "deg)";
@@ -91,11 +92,10 @@ function updateDonut(percent, element){
   
   function updateSlider(element, btnFn) {
     
-    
     if (element.getAttribute('type')=="range") {
 
-      if (btnFn == "add") element.value = (parseFloat(element.value) + parseFloat(element.getAttribute('step')))
-      if (btnFn == "minus") element.value = (parseFloat(element.value) - parseFloat(element.getAttribute('step')))
+      if (btnFn == "add") element.value = (parseFloat(element.value) + parseFloat(element.getAttribute('step')))// Adding button
+      if (btnFn == "minus") element.value = (parseFloat(element.value) - parseFloat(element.getAttribute('step')))// Minus button
 
       var parent = element.parentElement;
       var center = parent.parentNode.querySelector('.center')
@@ -103,6 +103,7 @@ function updateDonut(percent, element){
           bar = parent.querySelector('.range-slider__bar'),
           pct = element.value * ((parent.clientHeight - thumb.clientHeight) / parent.clientHeight);
       
+      center.innerHTML = dataPrep(element.value, element.id)
       thumb.style.bottom = pct + '%';
       bar.style.height = 'calc(' + pct + '% + ' + thumb.clientHeight / 2 + 'px)';
       updateDonut(element.value, element.parentNode);
@@ -116,10 +117,13 @@ function updateDonut(percent, element){
     }
   }
 
-  function changeValue(node, action) {
+
+  // changing the slider depending on the button input
+  function changeValue(node, action) { 
     var parent = node.parentElement;
     if (action == 'makeReq') {
-      dataPrep(parent.querySelector('.range-slider').children[0].value, parent.querySelector('.range-slider').children[0].id)
+      let val = dataPrep(parent.querySelector('.range-slider').children[0].value, parent.querySelector('.range-slider').children[0].id)
+      makeReq(val, parent.querySelector('.range-slider').children[0].id)
     }
     if([...node.classList].includes('minus')){
       updateSlider(node.previousElementSibling.children[0], 'minus')
@@ -140,46 +144,51 @@ function updateDonut(percent, element){
           
             updateSlider(slider);
             slider.addEventListener('input', function (element) {
-                updateSlider(slider);
+                updateSlider(slider); //update slider position
             });
             slider.addEventListener('change', function (element) {
-                dataPrep(slider.value, slider.id);
+                let val = dataPrep(slider.value, slider.id); //only send request when slider change settles
+                makeReq(val, slider.id)
             });
         });
 
         var buttons = [].slice.call(el.querySelectorAll('.btn'));// creating event listener for the plus and minus buttons
         buttons.forEach(function(button){
+          
           let timerID,
               counter = 0,
-              pressHoldEvent = new CustomEvent("pressHold"),
-              pressHoldDuration = 2000,
-              moved
+              pressHoldDuration = 2000,//maximum button hold duration
+              moved //variable changes over drag to fix mouse drag errors
 
+          //fix for mouse drag errors
           button.addEventListener("mousemove", function(e) {
-            moved = true
+            moved = true 
           }, false);
 
+          //click event to update slider
           button.addEventListener('click', function(element){
             changeValue(button);
             moved = false
           });
           
-
+          //Mobile functionality
+          // Pressing start
           button.addEventListener("touchstart", function(e) {
             moved = false
             requestAnimationFrame(timer);
             e.preventDefault();
-            console.log("Pressing!");
           }, false);
 
+          //Mobile functionality
+          // Pressing end
           button.addEventListener("touchend", function(e) {
             moved = false
             cancelAnimationFrame(timerID);
             counter = 0;
-            console.log("Not pressing!");
             changeValue(button, 'makeReq');
           }, false);
 
+          // Pressing end
           button.addEventListener("mousedown", function(e) {
             requestAnimationFrame(timer);
             e.preventDefault();
@@ -188,7 +197,8 @@ function updateDonut(percent, element){
           }, false);
 
           
-
+          // Pressing end 
+          // Send request with data
           button.addEventListener("mouseup", function(e) {
             moved = false
             cancelAnimationFrame(timerID);
@@ -199,7 +209,7 @@ function updateDonut(percent, element){
 
           function timer() {
             
-            if ((counter < pressHoldDuration) && (moved == false)) {
+            if ((counter < pressHoldDuration) && (moved == false)) {// Send request with data only if no drag
 
               let sensitivity = 0.25 // button sensitivity
               timerID = requestAnimationFrame(timer);
@@ -207,14 +217,10 @@ function updateDonut(percent, element){
 
             } else {
               console.log("Press threshold reached!");
-              button.dispatchEvent(pressHoldEvent);
             } 
             if (counter %2 == 0) {
-              changeValue(button, 'update');
+              changeValue(button, 'update'); // Change value with sensitivity
             }
-          }
-          function doSomething(e) {
-            console.log("pressHold event fired!");
           }
         });
 
