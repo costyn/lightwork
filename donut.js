@@ -6,15 +6,15 @@ function dataPrep(value, node){
   switch (node) {
     case 'pallette':
     val= Math.floor(value/10);
-    if( val == 1) { val = "RainbowColors_p";}
-    if( val == 2) { val = "RainbowStripeColors_p";}
-    if( val == 3) { val = "HeatColors_p";}
-    if( val == 4) { val = "LavaColors_p";}
-    if( val == 5) { val = "CloudColors_p";}
-    if( val == 6) { val = "OceanColors_p";}
-    if( val == 7) { val = "ForestColors_p";}
-    if( val == 8) { val = "PartyColors_p";}
-    if( val == 9) { val = "sutaburosuRainbowPalette";}
+    if( val == 0) { val = "RainbowColors_p";}
+    if( val == 1) { val = "RainbowStripeColors_p";}
+    if( val == 2) { val = "HeatColors_p";}
+    if( val == 3) { val = "LavaColors_p";}
+    if( val == 4) { val = "CloudColors_p";}
+    if( val == 5) { val = "OceanColors_p";}
+    if( val == 6) { val = "ForestColors_p";}
+    if( val == 7) { val = "PartyColors_p";}
+    if( val == 8) { val = "sutaburosuRainbowPalette";}
       break;
 
     case 'speed':
@@ -109,7 +109,8 @@ function updateDonut(percent, element){
           bar = parent.querySelector('.range-slider__bar'),
           pct = element.value * ((parent.clientHeight - thumb.clientHeight) / parent.clientHeight);
       
-      center.innerHTML = `<h4 class = "center-text" style = "margin : 0; color : white;" >${dataPrep(element.value, element.id)}</h4>`
+          element.id != 'pallette' ?center.innerHTML = `<h4 class = "center-text" style = "margin : 0; color : white;" >${dataPrep(element.value, element.id)}</h4>` : center.innerHTML = ``
+
       thumb.style.bottom = pct + '%';
       bar.style.height = 'calc(' + pct + '% + ' + thumb.clientHeight / 2 + 'px)';
       updateDonut(element.value, element.parentNode);
