@@ -89,13 +89,20 @@ function updateDonut(percent, element){
   }
 
   
-  function updateSlider(element) {
+  function updateSlider(element, btnFn) {
+    
+    
     if (element.getAttribute('type')=="range") {
+
+      if (btnFn == "add") element.value = (parseFloat(element.value) + parseFloat(element.getAttribute('step')))
+      if (btnFn == "minus") element.value = (parseFloat(element.value) - parseFloat(element.getAttribute('step')))
+
       var parent = element.parentElement;
       var center = parent.parentNode.querySelector('.center')
       var thumb = parent.querySelector('.range-slider__thumb'),
           bar = parent.querySelector('.range-slider__bar'),
           pct = element.value * ((parent.clientHeight - thumb.clientHeight) / parent.clientHeight);
+      
       thumb.style.bottom = pct + '%';
       bar.style.height = 'calc(' + pct + '% + ' + thumb.clientHeight / 2 + 'px)';
       updateDonut(element.value, element.parentNode);
@@ -109,6 +116,19 @@ function updateDonut(percent, element){
     }
   }
 
+  function changeValue(node, action) {
+    var parent = node.parentElement;
+    if (action == 'makeReq') {
+      dataPrep(parent.querySelector('.range-slider').children[0].value, parent.querySelector('.range-slider').children[0].id)
+    }
+    if([...node.classList].includes('minus')){
+      updateSlider(node.previousElementSibling.children[0], 'minus')
+    }else{
+      updateSlider(node.nextElementSibling.children[0], 'add')
+    }
+  }
+
+    
 
   (function initAndSetupTheSliders() {
     
@@ -127,12 +147,78 @@ function updateDonut(percent, element){
             });
         });
 
-        var buttons = [].slice.call(el.querySelectorAll('.btn'));
+        var buttons = [].slice.call(el.querySelectorAll('.btn'));// creating event listener for the plus and minus buttons
         buttons.forEach(function(button){
+          let timerID,
+              counter = 0,
+              pressHoldEvent = new CustomEvent("pressHold"),
+              pressHoldDuration = 2000,
+              moved
+
+          button.addEventListener("mousemove", function(e) {
+            moved = true
+          }, false);
+
           button.addEventListener('click', function(element){
-            changeValue(element);
+            changeValue(button);
+            moved = false
           });
+          
+
+          button.addEventListener("touchstart", function(e) {
+            moved = false
+            requestAnimationFrame(timer);
+            e.preventDefault();
+            console.log("Pressing!");
+          }, false);
+
+          button.addEventListener("touchend", function(e) {
+            moved = false
+            cancelAnimationFrame(timerID);
+            counter = 0;
+            console.log("Not pressing!");
+            changeValue(button, 'makeReq');
+          }, false);
+
+          button.addEventListener("mousedown", function(e) {
+            requestAnimationFrame(timer);
+            e.preventDefault();
+            console.log("Pressing!");
+            moved = false
+          }, false);
+
+          
+
+          button.addEventListener("mouseup", function(e) {
+            moved = false
+            cancelAnimationFrame(timerID);
+            counter = 0;
+            console.log("Not pressing!");
+            changeValue(button, 'makeReq');
+          }, false);
+
+          function timer() {
+            
+            if ((counter < pressHoldDuration) && (moved == false)) {
+
+              let sensitivity = 0.25 // button sensitivity
+              timerID = requestAnimationFrame(timer);
+              counter += sensitivity
+
+            } else {
+              console.log("Press threshold reached!");
+              button.dispatchEvent(pressHoldEvent);
+            } 
+            if (counter %2 == 0) {
+              changeValue(button, 'update');
+            }
+          }
+          function doSomething(e) {
+            console.log("pressHold event fired!");
+          }
         });
-        
+
       });
   }());
+
+ 
