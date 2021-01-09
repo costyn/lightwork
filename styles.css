@@ -116,9 +116,12 @@ body {
   height: 90%;
   left: 5%;
   position: absolute;
+  display: flex;
   top: 5%;
   width: 90%;
   background: linear-gradient(405deg, #343440 0%, #2196f3 50%, rgba(252,176,69,1) 100%);
+  align-items: center;
+  justify-content: center;
 }
 .text{
   color: rgb(243, 231, 231);
@@ -147,6 +150,7 @@ body {
   width: 25px;
   height: 25px;
   margin: 10px 0;
+  cursor: pointer;
   font-family: 'Noto Sans';
   font-size: 20px;
   background: linear-gradient(335deg, rgb(125 107 84) 0%, rgb(125 122 125) 50%, rgb(248 248 248) 100%);
@@ -207,18 +211,23 @@ body {
   border-radius: 50%;
   pointer-events: none;
 }
+.range-slider__thumb:hover{
+  cursor: grabbing;
+}
 .range-slider__bar {
   left: 16px;
   bottom: -200px;
   position: absolute;
   pointer-events: none;
   width: 8px;
+  cursor: cell;
   border-radius: 10px;
 }
 .range-slider input[type=range][orient=vertical] {
   position: relative;
   margin: 0;
   height: 100%;
+  cursor: -webkit-grabbing;
   width: 100%;
   display: inline-block;
   position: relative;
@@ -622,7 +631,12 @@ input:checked + .slider:before {
     position: absolute;
     width: 100%;
   }
-  
+  .center-text{
+    font-size: 34px;
+    background: -webkit-linear-gradient(#eee, #333);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
   .item {
     border-radius: 50%;
     clip: rect(0px, 50px, 100px, 0px);

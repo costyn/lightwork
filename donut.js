@@ -103,7 +103,7 @@ function updateDonut(percent, element){
           bar = parent.querySelector('.range-slider__bar'),
           pct = element.value * ((parent.clientHeight - thumb.clientHeight) / parent.clientHeight);
       
-      center.innerHTML = dataPrep(element.value, element.id)
+      center.innerHTML = `<h4 class = "center-text" style = "margin : 0; color : white;" >${dataPrep(element.value, element.id)}</h4>`
       thumb.style.bottom = pct + '%';
       bar.style.height = 'calc(' + pct + '% + ' + thumb.clientHeight / 2 + 'px)';
       updateDonut(element.value, element.parentNode);
