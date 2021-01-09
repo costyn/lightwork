@@ -35,8 +35,16 @@ function dataPrep(value, node){
       
     case 'brightness':
       val= Math.floor(value/0.392156862745098);
-
       break;
+    
+      case 'bpm':
+      val= Math.floor(value/0.392156862745098);
+      break;
+
+      case 'translation':
+      val= Math.floor(value/0.392156862745098);
+      break;
+
     default:
       break;
   }
@@ -46,7 +54,7 @@ function dataPrep(value, node){
 function makeReq(value, name, arg){
   console.log(baseUrl + '/update?' + `${name}=${value}`);
   
-  var path = baseUrl + '/update?' + `${name}=${value}`);
+  var path = baseUrl + '/update?' + `${name}=${value}`;
 
   var myHeaders = new Headers();
   myHeaders.append("Cookie", "cool");
