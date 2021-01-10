@@ -1,26 +1,21 @@
-
+const baseUrl = location.origin
 function dataPrep(value, node){
   let val
 
   // TODO :: Adding functionality to the params ===> BPM , pattern , translation-speed
   switch (node) {
-    case 'pallette':
-    val= Math.floor(value/10);
-    if( val == 0) { val = "RainbowColors_p";}
-    if( val == 1) { val = "RainbowStripeColors_p";}
-    if( val == 2) { val = "HeatColors_p";}
-    if( val == 3) { val = "LavaColors_p";}
-    if( val == 4) { val = "CloudColors_p";}
-    if( val == 5) { val = "OceanColors_p";}
-    if( val == 6) { val = "ForestColors_p";}
-    if( val == 7) { val = "PartyColors_p";}
-    if( val == 8) { val = "sutaburosuRainbowPalette";}
+    case 'palette':
+      val= Math.floor(value/10);
       break;
 
     case 'speed':
       val= Math.floor(value/0.392156862745098);
       break;
 
+    case 'translationSpeed':
+      val= Math.floor(value/0.392156862745098);
+      break;
+      
     case 'twist':
       document.querySelector(`#${node}`).checked ? val = 1 : val = 0
       break;
@@ -29,7 +24,7 @@ function dataPrep(value, node){
       val= Math.round(value/8.3333333333333333333333333333333)+3;
       break;
 
-    case 'centred':
+    case 'autoAdvancePalette':
       document.querySelector(`#${node}`).checked ? val = 1 : val = 0
       break;
       
@@ -37,11 +32,7 @@ function dataPrep(value, node){
       val= Math.floor(value/0.392156862745098);
       break;
     
-      case 'bpm':
-      val= Math.floor(value/0.392156862745098);
-      break;
-
-      case 'translation':
+    case 'bpm':
       val= Math.floor(value/0.392156862745098);
       break;
 
@@ -108,7 +99,9 @@ function updateDonut(percent, element){
       var thumb = parent.querySelector('.range-slider__thumb'),
           bar = parent.querySelector('.range-slider__bar'),
           pct = element.value * ((parent.clientHeight - thumb.clientHeight) / parent.clientHeight);
-          element.id != 'pallette' ?center.innerHTML = `<h4 class = "center-text" style = "margin : 0; color : white;" >${dataPrep(element.value, element.id)}</h4>` : center.innerHTML = ``
+      
+          // element.id != 'palette' ?center.innerHTML = `<h4 class = "center-text" style = "margin : 0; color : white;" >${dataPrep(element.value, element.id)}</h4>` : center.innerHTML = ``
+          center.innerHTML = `<h4 class = "center-text" style = "margin : 0; color : white;" >${dataPrep(element.value, element.id)}</h4>`
 
       thumb.style.bottom = pct + '%';
       bar.style.height = 'calc(' + pct + '% + ' + thumb.clientHeight / 2 + 'px)';

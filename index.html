@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Lumi</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 <div class="mother ">
@@ -28,11 +28,11 @@
             <span></span>
           </div>
         </div>
-        <span class="text" >pallette</span>
+        <span class="text" >palette</span>
       </div>
       <button class="btn plus">+</button>
       <div class="range-slider">
-        <input name = "pallette" id = "pallette" type="range" orient="vertical" min="0" max="100" step="11.111111111" />
+        <input name = "palette" id = "palette" type="range" orient="vertical" min="0" max="100" step="10" />
         <div class="range-slider__bar"></div>
         <div class="range-slider__thumb"></div>
       </div>
@@ -55,7 +55,7 @@
           <span></span>
         </div>
       </div>
-      <span class="text">speed</span>
+      <span class="text">rotation</span>
     </div>
     <button class="btn plus">+</button>
     <div class="range-slider">
@@ -65,6 +65,32 @@
     </div>
     <button class="btn minus">-</button>
   </div>
+
+  <div class="container">
+    <div class="donut-chart-block block">
+      <div class="donut-chart">
+        <div id="section1" class="clip">
+          <div class="item"></div>
+        </div>
+        <div id="section2" class="clip">
+          <div class="item"></div>
+        </div>
+        <div id="section3" class="clip">
+          <div class="item"></div>
+        </div>
+        <div class="center"><span></span></div>
+      </div>
+      <span class="text">translation</span>
+    </div>
+    <button class="btn plus">+</button>
+    <div class="range-slider">
+      <input  orient="vertical" type="range" id = "translationSpeed" name = "brightness" min="0" max="100" step = '0.392156862745098'>
+      <div class="range-slider__bar"></div>
+      <div class="range-slider__thumb"></div>
+    </div>
+    <button class="btn minus">-</button>
+  </div>
+
 
 
     <div class="container">
@@ -168,42 +194,17 @@
       </div>
       <button class="btn minus">-</button>
     </div>
-
-    <div class="container">
-      <div class="donut-chart-block block">
-        <div class="donut-chart">
-          <div id="section1" class="clip">
-            <div class="item"></div>
-          </div>
-          <div id="section2" class="clip">
-            <div class="item"></div>
-          </div>
-          <div id="section3" class="clip">
-            <div class="item"></div>
-          </div>
-          <div class="center"><span></span></div>
-        </div>
-        <span class="text">Translation</span>
-      </div>
-      <button class="btn plus">+</button>
-      <div class="range-slider">
-        <input  orient="vertical" type="range" id = "translation" name = "brightness" min="0" max="100" step = '0.392156862745098'>
-        <div class="range-slider__bar"></div>
-        <div class="range-slider__thumb"></div>
-      </div>
-      <button class="btn minus">-</button>
-    </div>
   </div>
-  
+
   <div class="switch-box">
     <div class="container flip">
       <div class="range-slider check">
         <label class="switch">
-          <input id="centred" name="centred" type="checkbox">
+          <input id="autoAdvancePalette" name="autoAdvancePalette" type="checkbox">
           <span class="slider round"></span>
       </label>
-      <span class="text switch-text">centred</span>
-      </div>
+      <span class="text switch-text">auto</span>
+    </div>
     </div>
     <div class="container flip ">
       <div class="range-slider check">
@@ -223,7 +224,7 @@
       
 
 </body>
-<script src="./donut.js"></script>
+<script src="/donut.js"></script>
 
 </script>
 </html>
