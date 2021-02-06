@@ -40,7 +40,15 @@ html {
     padding: 6em 2em;
     width: 80%;
     justify-self: center;
-    /* padding: 0; */
+    box-shadow: 
+      0 0 50px 0px #9e9eff, 
+      0 0 60px #fff,
+      inset 0 0 50px #fff,      /* inner white */
+      inset 20px 0 80px #b0b,   /* inner left magenta short */
+      inset -20px 0 80px #00f,  /* inner right cyan short */
+      inset 20px 0 300px #b0b,  /* inner left magenta broad */
+      inset -20px 0 300px #00f; /* inner right cyan broad */
+      /* padding: 0; */
     border-radius: 70px;
   }
   .mother-1{
@@ -74,8 +82,8 @@ body {
   height: 100vh;
   width: 100%;
   margin: 0;
-  background: linear-gradient(335deg, rgb(221 221 221) 0%, rgb(164 163 163) 50%, rgb(193 193 193) 100%);
-  background: linear-gradient(335deg, rgb(131 58 180 / 56%) 0%, rgb(254 189 173) 50%, rgb(252, 176, 69) 100%);
+  background: rgb(0,0,66);
+  background: linear-gradient(180deg, rgba(0,0,66,1) 0%, rgba(121,62,138,1) 100%);
   display: flex;
   padding: 0;
   flex-direction: column;
@@ -90,6 +98,8 @@ body {
   margin-right: 0px;
   width: fit-content;
   flex-direction: column;
+  border-radius: 10px;
+  /* box-shadow: 0 0 5px #fff; */
 }
 .block {
   width: fit-content;
@@ -582,8 +592,8 @@ input:checked + .slider:before {
     overflow-x: clip;
     bottom: 0;
     /* margin: 0; */
-    background: linear-gradient(335deg, rgb(221 221 221) 0%, rgb(164 163 163) 50%, rgb(193 193 193) 100%);
-    background: linear-gradient(335deg, rgb(131 58 180 / 56%) 0%, rgb(254 189 173) 50%, rgb(252, 176, 69) 100%);
+    background: rgb(0,0,66);
+    background: linear-gradient(180deg, rgba(0,0,66,1) 0%, rgba(121,62,138,1) 100%);
     /* display: flex; */
     /* padding: 0; */
     /* flex-direction: column; */
@@ -979,6 +989,7 @@ input:checked + .slider:before {
   }
     .mother{
       padding: 0em 2em;
+      
     }
     .donut-chart {
       position: relative;
