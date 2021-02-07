@@ -1,4 +1,4 @@
-const baseUrl = "https://pokeapi.co/api/v2/"
+
 function dataPrep(value, node){
   let val
 
@@ -108,12 +108,13 @@ function updateDonut(percent, element){
       var thumb = parent.querySelector('.range-slider__thumb'),
           bar = parent.querySelector('.range-slider__bar'),
           pct = element.value * ((parent.clientHeight - thumb.clientHeight) / parent.clientHeight);
-      
           element.id != 'pallette' ?center.innerHTML = `<h4 class = "center-text" style = "margin : 0; color : white;" >${dataPrep(element.value, element.id)}</h4>` : center.innerHTML = ``
 
       thumb.style.bottom = pct + '%';
       bar.style.height = 'calc(' + pct + '% + ' + thumb.clientHeight / 2 + 'px)';
+
       updateDonut(element.value, element.parentNode);
+
       if (element.getAttribute('max')==Math.round(element.value)){
         center.style.background = 'linear-gradient(335deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)'
         center.classList.add('heartbeat')
@@ -134,7 +135,7 @@ function updateDonut(percent, element){
     }
     if([...node.classList].includes('minus')){
       updateSlider(node.previousElementSibling.children[0], 'minus')
-    }else{
+    }else   {
       updateSlider(node.nextElementSibling.children[0], 'add')
     }
   }
@@ -163,69 +164,79 @@ function updateDonut(percent, element){
         buttons.forEach(function(button){
           
           let timerID,
+              delay = 1000,
+              setHold=null,
+              holdActive,
               counter = 0,
-              pressHoldDuration = 2000,//maximum button hold duration
               moved //variable changes over drag to fix mouse drag errors
 
           //fix for mouse drag errors
           button.addEventListener("mousemove", function(e) {
             moved = true 
+            cancelAnimationFrame(timer);
+            counter = 0
           }, false);
 
-          //click event to update slider
-          button.addEventListener('click', function(element){
-            changeValue(button);
-            moved = false
-          });
+          button.addEventListener('mouseleave', e=> {
+            notHolding()
+          })
+          
           
           //Mobile functionality
           // Pressing start
-          button.addEventListener("touchstart", function(e) {
-            moved = false
-            requestAnimationFrame(timer);
-            e.preventDefault();
-          }, false);
+          button.addEventListener("touchstart", holding, false);
 
           //Mobile functionality
           // Pressing end
-          button.addEventListener("touchend", function(e) {
-            moved = false
-            cancelAnimationFrame(timerID);
-            counter = 0;
-            changeValue(button, 'makeReq');
-          }, false);
+          button.addEventListener("touchend", notHolding, false);
 
           // Pressing end
-          button.addEventListener("mousedown", function(e) {
-            requestAnimationFrame(timer);
-            e.preventDefault();
-            console.log("Pressing!");
-            moved = false
-          }, false);
+          button.addEventListener("mousedown", holding, false);
 
           
           // Pressing end 
           // Send request with data
-          button.addEventListener("mouseup", function(e) {
+          button.addEventListener("mouseup", notHolding, false);
+
+          function holding() {
             moved = false
-            cancelAnimationFrame(timerID);
-            counter = 0;
-            console.log("Not pressing!");
-            changeValue(button, 'makeReq');
-          }, false);
+            setHold = setTimeout(function() {
+              setHold = null
+              console.log('holding');
+              holdActive = true;
+              requestAnimationFrame(timer);
+            }, delay);
+          }
+
+          function notHolding() {
+            console.log('relesse');
+            console.log(setHold);
+            if (setHold) {
+              clearTimeout(setHold);
+              changeValue(button, 'update');
+              
+            }
+            else if (holdActive) {
+              holdActive = false;
+              cancelAnimationFrame(timerID);
+              counter = 0
+            }
+          }
 
           function timer() {
-            
-            if ((counter < pressHoldDuration) && (moved == false)) {// Send request with data only if no drag
-
-              let sensitivity = 0.25 // button sensitivity
-              timerID = requestAnimationFrame(timer);
+            timerID = requestAnimationFrame(timer);
+            if ( (moved == false)) {// Send request with data only if no drag
+              
+              let sensitivity = 0.5 // button sensitivity
               counter += sensitivity
 
             } else {
+              console.log(moved);
+              
               console.log("Press threshold reached!");
             } 
-            if (counter %2 == 0) {
+            if (counter %2 == 0 && moved == false) {
+              console.log(counter);
               changeValue(button, 'update'); // Change value with sensitivity
             }
           }
