@@ -214,12 +214,15 @@ function updateDonut(percent, element){
             if (setHold) {
               clearTimeout(setHold);
               changeValue(button, 'update');
+              changeValue(button, 'makeReq');
               
             }
             else if (holdActive) {
               holdActive = false;
               cancelAnimationFrame(timerID);
-              counter = 0
+              counter = 0;
+              changeValue(button, 'update');
+              changeValue(button, 'makeReq');
             }
           }
 
